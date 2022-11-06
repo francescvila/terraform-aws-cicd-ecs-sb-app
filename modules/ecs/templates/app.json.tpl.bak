@@ -1,0 +1,46 @@
+[
+  {
+    "essential": true,
+    "memory": 256,
+    "name": "${app_name}",
+    "cpu": 256,
+    "image": "${repository_url}:latest",
+    "workingDirectory": "/app",
+    "portMappings": [
+      {
+        "containerPort": ${container_port},
+        "hostPort": ${container_port}
+      }
+    ],
+    "environment": [
+      {
+        "name": "DATABASE_HOST",
+        "value": "${database_host}"
+      }, 
+      {
+        "name": "DATABASE_PORT",
+        "value": "${database_port}"
+      },
+      {
+        "name": "DATABASE_USER",
+        "value": "${database_user}"
+      },
+      {
+        "name": "DATABASE_PASSWORD",
+        "value": "${database_password}"
+      },
+      {
+        "name": "DATABASE_NAME",
+        "value": "${database_name}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${cloudwatch_log_group}",
+        "awslogs-region": "${aws_region}",
+        "awslogs-stream-prefix": "ecs"
+      }
+    }
+  }
+]
